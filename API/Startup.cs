@@ -56,6 +56,13 @@ namespace API
              // Video 56
              services.AddApplicationServices();   
                 services.AddSwaggerDocumentation();
+             services.AddCors(opt =>
+             {
+                 opt.AddPolicy("CorsPolicy", policy =>
+                 {
+                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+                 });
+             })   ;
             // Video 54
             // Nuget add 'swashbukcle.aspnetcore - SwaggerGen then
             // Nuget add 'swashbukcle.aspnetcore - SwaggerUI 
@@ -88,6 +95,7 @@ namespace API
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
 
